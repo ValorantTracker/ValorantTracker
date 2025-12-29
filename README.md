@@ -7,7 +7,7 @@
 **A sleek, real-time Valorant match tracker with agent auto-lock and player statistics**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/platform-Windows-blue.svg)](https://github.com/yourusername/valorant-tracker)
+[![Platform](https://img.shields.io/badge/platform-Windows-blue.svg)](https://github.com/ValorantTracker/valorant-tracker)
 [![Electron](https://img.shields.io/badge/Electron-28.0.0-47848F.svg)](https://www.electronjs.org/)
 
 [Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Building](#-building) • [Contributing](#-contributing)
@@ -54,7 +54,7 @@
 
 ### Option 1: Download Pre-built Release (Recommended)
 
-1. Go to [Releases](https://github.com/yourusername/valorant-tracker/releases/latest)
+1. Go to [Releases](https://github.com/ValorantTracker/valorant-tracker/releases/latest)
 2. Download the latest version:
    - **`Valorant-Tracker-Setup-x.x.x.exe`** - Full installer with desktop shortcut
    - **`Valorant-Tracker-x.x.x.exe`** - Portable version (no installation required)
@@ -65,7 +65,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/valorant-tracker.git
+git clone https://github.com/ValorantTracker/valorant-tracker.git
 cd valorant-tracker
 
 # Install Node.js dependencies
@@ -231,9 +231,9 @@ This tool uses Valorant's unofficial client API, which may change without notice
 
 ## 📞 Support & Issues
 
-- **Bug Reports**: [GitHub Issues](https://github.com/yourusername/valorant-tracker/issues)
-- **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/valorant-tracker/discussions)
-- **Troubleshooting**: Check the [Wiki](https://github.com/yourusername/valorant-tracker/wiki)
+- **Bug Reports**: [GitHub Issues](https://github.com/ValorantTracker/valorant-tracker/issues)
+- **Feature Requests**: [GitHub Discussions](https://github.com/ValorantTracker/valorant-tracker/discussions)
+- **Troubleshooting**: Check the [Wiki](https://github.com/ValorantTracker/valorant-tracker/wiki)
 
 ---
 
@@ -243,6 +243,6 @@ This tool uses Valorant's unofficial client API, which may change without notice
 
 **Star ⭐ this repo if you found it helpful!**
 
-[Report Bug](https://github.com/yourusername/valorant-tracker/issues) • [Request Feature](https://github.com/yourusername/valorant-tracker/issues) • [View Releases](https://github.com/yourusername/valorant-tracker/releases)
+[Report Bug](https://github.com/ValorantTracker/valorant-tracker/issues) • [Request Feature](https://github.com/ValorantTracker/valorant-tracker/issues) • [View Releases](https://github.com/ValorantTracker/valorant-tracker/releases)
 
 </div>
