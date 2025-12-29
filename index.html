@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Match Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Map Background -->
+    <div id="mapBackground" class="map-background"></div>
+    <div class="overlay"></div>
+
+    <div class="app-container">
+        <!-- Custom Title Bar -->
+        <div class="title-bar">
+            <div class="title-bar-left">
+                <span class="app-title-bar">VALORANT TRACKER</span>
+            </div>
+            <div class="title-bar-controls">
+                <button id="minimizeWindowBtn" class="title-bar-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12">
+                        <rect x="0" y="5" width="12" height="2" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button id="maximizeWindowBtn" class="title-bar-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12">
+                        <rect x="1" y="1" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button id="closeWindowBtn" class="title-bar-btn close-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12">
+                        <path d="M 1 1 L 11 11 M 11 1 L 1 11" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <h1 class="app-title">VALORANT TRACKER</h1>
+                <span id="statusIndicator" class="status-indicator">●</span>
+                <span id="statusText" class="status-text">Not Connected</span>
+            </div>
+            <div class="top-bar-right">
+                <div class="custom-select">
+                    <div class="select-header" id="regionSelectHeader">
+                        <span class="select-icon">🌍</span>
+                        <span class="select-value" id="regionValue">Europe</span>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                    <div class="select-dropdown hidden" id="regionDropdown">
+                        <div class="select-option" data-value="na">
+                            <span class="option-flag">🇺🇸</span>
+                            <span>North America</span>
+                        </div>
+                        <div class="select-option selected" data-value="eu">
+                            <span class="option-flag">🇪🇺</span>
+                            <span>Europe</span>
+                        </div>
+                        <div class="select-option" data-value="ap">
+                            <span class="option-flag">🌏</span>
+                            <span>Asia Pacific</span>
+                        </div>
+                        <div class="select-option" data-value="kr">
+                            <span class="option-flag">🇰🇷</span>
+                            <span>Korea</span>
+                        </div>
+                        <div class="select-option" data-value="latam">
+                            <span class="option-flag">🌎</span>
+                            <span>Latin America</span>
+                        </div>
+                        <div class="select-option" data-value="br">
+                            <span class="option-flag">🇧🇷</span>
+                            <span>Brazil</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="initBtn" class="btn btn-primary">Connect</button>
+            </div>
+        </header>
+
+        <!-- Match Info Header -->
+        <div id="matchHeader" class="match-header-bar hidden">
+            <div class="match-info-left">
+                <h2 id="mapName" class="map-name">-</h2>
+                <span id="gameMode" class="game-mode">-</span>
+            </div>
+            <div id="sideIndicator" class="side-indicator hidden">
+                <span id="sideText" class="side-text">-</span>
+            </div>
+        </div>
+
+        <!-- Main Match View -->
+        <div id="matchView" class="match-view hidden">
+            <!-- Allied Team -->
+            <div class="team-panel team-allied">
+                <div class="team-header">
+                    <h3 class="team-title">ALLIED TEAM</h3>
+                    <span id="alliedCount" class="team-count">0/5</span>
+                </div>
+                <div id="alliedPlayers" class="team-players"></div>
+            </div>
+
+            <!-- Enemy Team -->
+            <div class="team-panel team-enemy">
+                <div class="team-header">
+                    <h3 class="team-title">ENEMY TEAM</h3>
+                    <span id="enemyCount" class="team-count">0/5</span>
+                </div>
+                <div id="enemyPlayers" class="team-players"></div>
+            </div>
+        </div>
+
+        <!-- No Match Screen -->
+        <div id="noMatchScreen" class="no-match-screen">
+            <div class="no-match-content">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                </svg>
+                <h2>Waiting for Match</h2>
+                <p>Queue up for a game to see player information</p>
+            </div>
+        </div>
+
+        <!-- Control Panel (Collapsible) -->
+        <div class="control-panel">
+            <button id="toggleControls" class="toggle-controls-btn">⚙ CONTROLS</button>
+            <div id="controlsContent" class="controls-content hidden">
+                <!-- Auto-Lock -->
+                <div class="control-section">
+                    <h3>Agent Auto-Lock</h3>
+                    <div class="warning-badge">
+                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm1 15H9v-2h2v2zm0-4H9V5h2v6z"/>
+                        </svg>
+                        <span>Risk of account flag - Use at your own risk!</span>
+                    </div>
+                    <div class="control-row">
+                        <button id="selectAgentBtn" class="btn-modern btn-secondary" disabled>
+                            <span id="selectedAgentDisplay">Select Agent...</span>
+                        </button>
+                        <button id="autolockToggle" class="btn-modern btn-danger" disabled>
+                            <span id="autolockText">Enable</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Performance Mode -->
+                <div class="control-section">
+                    <h3>Performance Mode</h3>
+                    <div class="control-row">
+                        <span class="control-label">Reduce animations for better performance</span>
+                        <button id="performanceModeToggle" class="btn-modern btn-secondary">
+                            <span id="performanceModeText">Enable</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Match History -->
+                <div class="control-section">
+                    <h3>Match History</h3>
+                    <div id="historyContainer" class="history-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification-toast hidden">
+        <div class="notification-icon">●</div>
+        <div class="notification-text">
+            <h4 id="notificationTitle"></h4>
+            <p id="notificationBody"></p>
+        </div>
+    </div>
+
+    <!-- Agent Selection Modal -->
+    <div id="agentModal" class="modal-overlay hidden">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Select Agent for Auto-Lock</h2>
+                <button id="closeModal" class="modal-close-btn">
+                    <svg width="20" height="20" viewBox="0 0 12 12">
+                        <path d="M 1 1 L 11 11 M 11 1 L 1 11" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="agent-grid" id="agentGrid">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

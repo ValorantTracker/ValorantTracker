@@ -1,0 +1,4 @@
+valclient
+flask
+flask-cors
+requests
